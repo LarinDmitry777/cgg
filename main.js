@@ -16,8 +16,6 @@ function generateTasks() {
 }
 
 function Task(props) {
-    console.log('Props');
-    console.log(props);
     return (
         <a className="task" href={props.task.href}>
             <div className="task__title">{props.task.title}</div>
@@ -41,11 +39,3 @@ class App extends React.Component{
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-console.log('render');
-
-// const canvas = document.getElementById('canvas');
-// const context = canvas.getContext('2d');
-//
-// context.rect(0, 0, 100, 100);
-// context.stroke();

@@ -21,7 +21,6 @@ input
 .button
 {
     display: block;
-    cursor: pointer;
     font-size: 20px;
     font-family: monospace;
     margin: 10px auto;
@@ -29,7 +28,10 @@ input
     font-weight: bold;
 }
 
-.button__draw {
+.process-button
+{
+    user-select:none;
+    cursor: pointer;
     text-decoration: none;
     font-weight: 500;
     position: relative;
@@ -41,7 +43,8 @@ input
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.2);
 }
 
-.button__draw:before {
+.process-button:before
+{
     position: absolute;
     content: '';
     width: 0;
@@ -54,12 +57,14 @@ input
     transition: all 300ms ease;
 }
 
-.button__draw:hover {
+.process-button:hover
+{
     color: black;
     box-shadow: none;
 }
 
-.button__draw:hover:before {
+.process-button:hover:before
+{
     position: absolute;
     content: '';
     width: 100%;
@@ -69,4 +74,29 @@ input
     left: 0;
     right: 0;
     z-index: -1;
+}
+
+.message-list
+{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+}
+
+.message-list__message
+{
+    margin: 10px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: black;
+    border: 2px solid red;
+    color: white;
+}
+
+.buttons_list
+{
+    display: flex;
 }
