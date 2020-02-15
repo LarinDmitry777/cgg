@@ -6,14 +6,21 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.messages = [];
-        this.functions = ['Math.sin(x)', 'Math.cos(x) * x', 'x * x', 'x * (x + x)', 'x - Math.sin(x) * x'];
+        this.functions = [
+            'Math.sin(x)',
+            'Math.cos(x) * x',
+            'x * x', 'x * (x + x)',
+            'x - Math.sin(x) * x',
+            'x * x + Math.sin(x) * x * x',
+            '4 * x - Math.sin(x) * x'
+        ];
         this.state = {
             a: '-5',
             b: '5',
             f: 'Math.sin(x)',
             canvasWidth: 920,
             canvasHeight: 600,
-            messages: []
+            renderedMessages: []
         };
 
         this.draw = this.draw.bind(this);
@@ -30,7 +37,7 @@ class App extends React.Component {
         const a = -getRandomInt(100) - 10;
         const textOfFunction = this.functions[getRandomInt(this.functions.length)];
         this.setState({a: a.toString(), b: b.toString(), f: textOfFunction});
-        this.draw()
+        setTimeout(this.draw);
     }
 
     draw() {
@@ -68,8 +75,6 @@ class App extends React.Component {
             this.createMessage('Функция указана неверно')
         }
 
-        console.log(a, b, textOfFunction);
-
         const f = function (x) {
             return eval(textOfFunction);
         };
@@ -87,8 +92,8 @@ class App extends React.Component {
             return;
         }
 
-        let maxY = -Number.MAX_VALUE;
-        let minY = Number.MAX_VALUE;
+        let maxY = 1;
+        let minY = -1;
 
         for (let xx = 0; xx < canvasWidth; xx++) {
             const x = a + xx * (b - a) / canvasWidth;
@@ -102,10 +107,13 @@ class App extends React.Component {
             }
         }
 
+        maxY += 1;
+        minY -= 1;
+
         const xx0 = -a * canvasWidth / (b - a);
         const yy0 = maxY * canvasHeight / (maxY - minY);
 
-        context.strokeStyle = "red";
+        context.strokeStyle = "blue";
         context.beginPath();
         context.moveTo(xx0, 0);
         context.lineTo(xx0, canvasHeight);
@@ -132,7 +140,7 @@ class App extends React.Component {
         points.forEach(p => context.lineTo(p.x, p.y));
         context.stroke();
 
-        this.createMessage('График успешно построен', 3);
+        this.createMessage('График успешно построен', 0.5);
     }
 
     handleChangeA(event) {
@@ -150,18 +158,18 @@ class App extends React.Component {
     createMessage(text, lifeTimeInSecounds = 3) {
         const messages = this.messages;
         messages.push(text);
-        this.setState({messages});
+        this.setState({renderedMessages: messages});
 
         setTimeout(() => {
             const messages = this.messages;
             const indexOfMessage = messages.indexOf(text);
             messages.splice(indexOfMessage, 1);
-            this.setState({messages});
+            this.setState({renderedMessages: messages});
         }, lifeTimeInSecounds * 1000);
     }
 
     renderMessages() {
-        return this.state.messages.map(m => <Message text={m} key={Math.random()}/>);
+        return this.state.renderedMessages.map(m => <Message text={m} key={Math.random()}/>);
     }
 
     render() {

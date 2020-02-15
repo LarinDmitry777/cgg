@@ -3,6 +3,7 @@
     display: block;
     border: 3px red solid;
     background: black;
+    margin-bottom: 20px;
 }
 
 input

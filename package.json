@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Задания по курсу Компьютерная Графика и Геометрия",
   "main": "main.js",
+  "repository": {
+    "url": "https://github.com/LarinDmitry777/cgg"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
