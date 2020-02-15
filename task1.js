@@ -12,7 +12,8 @@ class App extends React.Component {
             'x * x', 'x * (x + x)',
             'x - Math.sin(x) * x',
             'x * x + Math.sin(x) * x * x',
-            '4 * x - Math.sin(x) * x'
+            '4 * x - Math.sin(x) * x',
+            'x * x * x'
         ];
         this.state = {
             a: '-5',
@@ -41,6 +42,7 @@ class App extends React.Component {
     }
 
     draw() {
+        // Непосредственно решение задачи
         let isHasException = false;
         const canvas = document.getElementsByClassName('canvas').item(0);
         const context = canvas.getContext('2d');
@@ -49,7 +51,7 @@ class App extends React.Component {
         const canvasHeight = this.state.canvasHeight - 1;
 
         context.fillStyle = "black";
-        context.fillRect(0, 0, canvasWidth, canvasHeight);
+        context.fillRect(0, 0, canvasWidth, canvasHeight + 1);
 
         const a = Number.parseInt(this.state.a);
         if (Number.isNaN(a)) {
